@@ -1,0 +1,20 @@
+# POS tags in output/curated/jmdict-en-jp.parquet
+# rows: 441,348   unique pos values: 16
+
+value	count
+noun	329,616
+verb	32,782
+phrase	31,927
+adj	28,126
+adv	11,702
+intj	2,096
+suffix	1,275
+conj	799
+particle	790
+prefix	698
+pron	661
+aux	367
+counter	250
+num	205
+other	33
+cop	21

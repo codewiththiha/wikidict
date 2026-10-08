@@ -204,11 +204,13 @@ below as the primary EN→MY table.
 | [english-myanmar-dictionary-dataset-mcfnlp](https://huggingface.co/datasets/chuuhtetnaing/english-myanmar-dictionary-dataset-mcfnlp) | en→my | **110,640 rows**, parquet, schema `word/pos/definition` (Burmese words) | the cleanest EN→MY found; from the [MCF NLP dictionary](https://github.com/mcfnlp/Dictionary) |
 | [english-myanmar-dictionary-dataset-EngMyanDictionary](https://huggingface.co/datasets/chuuhtetnaing/english-myanmar-dictionary-dataset-EngMyanDictionary) | en→my | ~950 MB, 2 parquet shards | messier: HTML-formatted definitions, images, keywords |
 | [JMdict (jmdict-simplified)](https://github.com/scriptin/jmdict-simplified/releases) | ja↔en | **218,863 entries**, JSON 11.5 MB (`jmdict-eng-*.json.tgz`), CC BY-SA | the standard Japanese word dictionary (used by Yomichan/10ten); short word-level English glosses, POS, kana+kanji — ideal for JA, usable reversed |
+| [Princeton WordNet 3.0 + WOLF (Open Multilingual Wordnet)](https://github.com/omwn/omw-data/blob/master/wns/fra/wn-data-fra.tab) | en↔fr | **208,351 pairs**, built via `build_wordnet_fr.py` | NLP-mainstream, non-Wiktionary; English lemma ↔ French lemma per synset, free/Open licenses |
 | [English Wiktionary translations](https://kaikki.org/dictionary/English/words/kaikki.org-dictionary-English-words.jsonl) | en→ja/fr/my… | 3.3 GB JSONL | what `build_reverse.py` parses → the `*-words` tables |
-| [Freedict](https://freedict.org/downloads/) | eng↔fra etc. | e.g. [eng-fra 0.1.6 (dictd)](https://download.freedict.org/dictionaries/eng-fra/0.1.6/freedict-eng-fra-0.1.6.dictd.tar.xz), GPL | community European-language dictionaries, TEI/dictd formats |
+| [Freedict](https://freedict.org/downloads/) | eng↔fra etc. | e.g. [eng-fra 0.1.6 (dictd)](https://download.freedict.org/dictionaries/eng-fra/0.1.6/freedict-eng-fra-0.1.6.dictd.tar.xz), GPL | community dictionaries; eng-fra is small (**8,805 headwords**) so it was not adopted |
 
 No HuggingFace equivalent of the MCFNLP dataset was found for Japanese or
-French; JMdict (ja) and Wiktionary-reverse/Freedict (fr) fill those gaps.
+French; JMdict (ja) and WordNet+WOLF (fr) fill those gaps as the primary
+non-Wiktionary sources.
 
 ## Organized output folders (`output/reverse/` and `output/curated/`)
 
@@ -224,8 +226,11 @@ output/
     ├── mcfnlp-en-my.parquet      110,640 rows  EN↔MY primary (HuggingFace)
     ├── wiktionary-en-my.parquet   8,149 rows  EN↔MY supplement
     ├── wiktionary-en-jp.parquet  69,786 rows  EN↔JP now
-    ├── jmdict-en-jp.parquet     443,207 rows  EN↔JP 3x+ coverage (JMdict, reversed)
-    └── wiktionary-en-fr.parquet 128,263 rows  EN↔FR solid
+    ├── jmdict-en-jp.parquet     441,348 rows  EN↔JP 3x+ coverage (JMdict, 3 cols)
+    ├── wordnet-en-fr.parquet    208,351 rows  EN↔FR primary (WordNet+WOLF, non-Wiki)
+    └── wiktionary-en-fr.parquet 128,263 rows  EN↔FR supplement
+
+output/pos-tags/               unique `pos` values per parquet + SUMMARY.txt
 ```
 
 Regenerate them:
@@ -234,16 +239,27 @@ Regenerate them:
 # FULL unfiltered reverse tables (no POS/tag/script filter, no de-dup)
 python scripts/build_reverse.py --no-filter --outdir output/reverse
 
-# JMdict reversed to Parquet (English gloss -> Japanese word)
+# JMdict reversed to Parquet (3 cols: word, pos, definition)
 python scripts/build_jmdict.py            # -> output/curated/jmdict-en-jp.parquet
+
+# EN<->FR from Princeton WordNet 3.0 + WOLF (non-Wiktionary)
+python scripts/build_wordnet_fr.py        # -> output/curated/wordnet-en-fr.parquet
+
+# POS-tag vocabulary report (.txt per parquet + SUMMARY.txt)
+python scripts/extract_pos_tags.py        # -> output/pos-tags/
 ```
 
 * `output/curated/` is the app-ready set: English is always the `word`
-  column, the target-language word is in `definition`. The mcfnlp file has 3
-  columns (`word,pos,definition`); the rest add `romanization, sense,
-  lang_code, source`. Each folder has its own `README.md`.
-* `build_jmdict.py` reads the JMdict JSON (see the Research table for the
-  download link) and maps JMdict POS codes to broad categories.
+  column, the target-language word is in `definition`. Two schemas: 3
+  columns (`word,pos,definition`) for `mcfnlp-en-my` and `jmdict-en-jp`;
+  7 columns (`+ romanization, sense, lang_code, source`) for the rest.
+  Each folder has its own `README.md`.
+* `build_jmdict.py` reads the JMdict JSON and maps JMdict POS codes to ONE
+  broad category (primary tag), so every row has a single bridge-friendly
+  `pos`. `build_wordnet_fr.py` joins Princeton WordNet 3.0 English lemmas
+  with the French lemmas of WOLF per synset. `extract_pos_tags.py` writes the
+  unique `pos` values of every parquet to `output/pos-tags/` (per-file `.txt`
+  plus a `SUMMARY.txt` cross-file comparison).
 
 ## Notes for the bridge-dictionary app
 

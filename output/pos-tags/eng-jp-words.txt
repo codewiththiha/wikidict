@@ -1,0 +1,22 @@
+# POS tags in output/eng-jp-words.parquet
+# rows: 69,328   unique pos values: 18
+
+value	count
+noun	45,080
+name	7,783
+verb	6,827
+adj	5,948
+adv	1,206
+intj	620
+phrase	580
+prep_phrase	215
+prep	205
+proverb	202
+pron	185
+num	183
+conj	129
+det	124
+particle	24
+contraction	8
+article	5
+postp	4

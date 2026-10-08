@@ -1,0 +1,23 @@
+# POS tags in output/curated/wiktionary-en-my.parquet
+# rows: 8,149   unique pos values: 19
+
+value	count
+noun	5,421
+name	1,233
+verb	616
+adj	445
+adv	103
+phrase	72
+prep	51
+pron	51
+num	47
+det	29
+intj	25
+suffix	14
+conj	13
+proverb	11
+prep_phrase	8
+particle	6
+prefix	2
+contraction	1
+symbol	1

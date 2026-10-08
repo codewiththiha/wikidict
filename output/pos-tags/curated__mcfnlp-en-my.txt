@@ -1,0 +1,29 @@
+# POS tags in output/curated/mcfnlp-en-my.parquet
+# rows: 110,640   unique pos values: 25
+
+value	count
+n	55,229
+v	23,878
+adj	20,750
+adv	4,987
+(empty)	1,170
+prep	1,045
+pron	508
+interj	481
+det	390
+advpart	345
+conj	305
+indefpron	220
+adjs	209
+ns	172
+indefdet	164
+indefadv	141
+suff	140
+symb	120
+pers	93
+pref	91
+abbr	70
+possess	63
+vs	35
+advs	18
+indefart	16

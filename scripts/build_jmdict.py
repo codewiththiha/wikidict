@@ -2,18 +2,14 @@
 """Convert JMdict (Japanese<->English) JSON into a reversed Parquet table.
 
 JMdict ships Japanese-headword -> English-gloss. For the English-as-bridge
-dictionary app we reverse it so English is the key, matching the schema of
-build_reverse.py output:
+dictionary app we reverse it so English is the key. The output keeps ONLY
+the three columns the app needs:
 
     word          English gloss text      (the bridge key)
-    pos           mapped part of speech (noun/verb/adj/adv/...)
+    pos           single mapped part of speech (noun/verb/adj/adv/...)
     definition    the Japanese word (kanji if present, else kana)
-    romanization  the kana reading
-    sense         context (field / misc / dialect / info)
-    lang_code     "ja"
-    source        JMdict version + date
 
-One row per (entry, sense, English gloss). Exact duplicate rows are collapsed.
+One row per (English gloss, pos, Japanese word); exact duplicates collapsed.
 
 Usage:
     python scripts/build_jmdict.py
@@ -33,8 +29,7 @@ import pandas as pd
 
 SOURCE_PREFIX = "JMdict"
 
-COLUMNS = ["word", "pos", "definition", "romanization", "sense",
-           "lang_code", "source"]
+COLUMNS = ["word", "pos", "definition"]
 
 #: JMdict POS code -> broad category (bridging-friendly)
 POS_MAP = {
@@ -50,7 +45,12 @@ POS_MAP = {
 
 
 def map_pos(codes: list[str]) -> str:
-    out: list[str] = []
+    """Map JMdict POS codes to ONE broad category.
+
+    JMdict lists multiple POS tags per sense in priority order; we keep only
+    the primary one so every row carries a single bridge-friendly tag
+    (noun / verb / adj / adv / ...) like all the other files.
+    """
     for c in codes or []:
         m = POS_MAP.get(c)
         if m is None:
@@ -64,9 +64,8 @@ def map_pos(codes: list[str]) -> str:
                 m = "noun"
             else:
                 m = "other"
-        if m not in out:
-            out.append(m)
-    return ", ".join(out) if out else ""
+        return m
+    return ""
 
 
 def head_and_reading(entry: dict) -> tuple[str, str]:
@@ -78,14 +77,6 @@ def head_and_reading(entry: dict) -> tuple[str, str]:
     if kana:
         return kana[0], kana[0]
     return "", ""
-
-
-def sense_context(sense: dict) -> str:
-    parts = []
-    for key in ("field", "misc", "dialect", "info"):
-        vals = sense.get(key) or []
-        parts.extend(str(v) for v in vals if v)
-    return "; ".join(dict.fromkeys(parts))
 
 
 def main() -> None:
@@ -115,12 +106,11 @@ def main() -> None:
     seen: set[tuple] = set()
     skipped_no_gloss = 0
     for entry in words:
-        definition, roman = head_and_reading(entry)
+        definition, _roman = head_and_reading(entry)
         if not definition:
             continue
         for sense in entry.get("sense") or []:
             pos = map_pos(sense.get("partOfSpeech") or [])
-            context = sense_context(sense)
             for gloss in sense.get("gloss") or []:
                 if gloss.get("lang") != "eng":
                     continue
@@ -128,7 +118,7 @@ def main() -> None:
                 if not text:
                     skipped_no_gloss += 1
                     continue
-                key = (text, pos, definition, roman, context)
+                key = (text, pos, definition)
                 if key in seen:
                     continue
                 seen.add(key)
@@ -136,10 +126,6 @@ def main() -> None:
                     "word": text,
                     "pos": pos,
                     "definition": definition,
-                    "romanization": roman,
-                    "sense": context,
-                    "lang_code": "ja",
-                    "source": source,
                 })
 
     df = pd.DataFrame(rows, columns=COLUMNS)

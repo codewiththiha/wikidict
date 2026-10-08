@@ -1,0 +1,29 @@
+# POS tags in output/eng-fr-all.parquet
+# rows: 459,790   unique pos values: 25
+
+value	count
+verb	284,585
+noun	103,540
+adj	49,921
+name	11,563
+adv	5,267
+intj	839
+phrase	653
+suffix	561
+prep	480
+prefix	405
+pron	354
+proverb	312
+prep_phrase	289
+num	247
+conj	203
+contraction	195
+character	128
+det	93
+symbol	72
+article	33
+punct	26
+particle	13
+interfix	7
+infix	2
+postp	2

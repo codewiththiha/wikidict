@@ -1,0 +1,8 @@
+# POS tags in output/curated/wordnet-en-fr.parquet
+# rows: 208,351   unique pos values: 4
+
+value	count
+noun	148,115
+verb	32,294
+adj	21,813
+adv	6,129

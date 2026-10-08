@@ -1,0 +1,82 @@
+POS TAG COMPARISON ACROSS ALL PARQUET FILES
+============================================================
+
+file                                                       rows unique pos
+----------------------------------------------------------------------------
+output/curated/jmdict-en-jp.parquet                     441,348         16
+output/curated/mcfnlp-en-my.parquet                     110,640         25
+output/curated/wiktionary-en-fr.parquet                 128,263         21
+output/curated/wiktionary-en-jp.parquet                  69,786         21
+output/curated/wiktionary-en-my.parquet                   8,149         19
+output/curated/wordnet-en-fr.parquet                    208,351          4
+output/eng-fr-all.parquet                               459,790         25
+output/eng-fr-main.parquet                               69,125         20
+output/eng-fr-words.parquet                             127,564         18
+output/eng-jp-all.parquet                               149,410         25
+output/eng-jp-main.parquet                               51,199         21
+output/eng-jp-words.parquet                              69,328         18
+output/eng-mm-all.parquet                                14,547         21
+output/eng-mm-main.parquet                                6,279         16
+output/eng-mm-words.parquet                               8,130         16
+output/reverse/eng-fr-words.parquet                     128,263         21
+output/reverse/eng-jp-words.parquet                      69,786         21
+output/reverse/eng-mm-words.parquet                       8,149         19
+
+UNION of all pos values across files: 54 distinct
+
+pos value                files containing it (18 total)
+----------------------------------------------------------------------------
+(empty)                   1  curated/mcfnlp-en-my.parquet
+abbr                      1  curated/mcfnlp-en-my.parquet
+adj                      18  curated/jmdict-en-jp.parquet, curated/mcfnlp-en-my.parquet, curated/wiktionary-en-fr.parquet, curated/wiktionary-en-jp.parquet, curated/wiktionary-en-my.parquet, curated/wordnet-en-fr.parquet, eng-fr-all.parquet, eng-fr-main.parquet, eng-fr-words.parquet, eng-jp-all.parquet, eng-jp-main.parquet, eng-jp-words.parquet, eng-mm-all.parquet, eng-mm-main.parquet, eng-mm-words.parquet, reverse/eng-fr-words.parquet, reverse/eng-jp-words.parquet, reverse/eng-mm-words.parquet
+adjs                      1  curated/mcfnlp-en-my.parquet
+adnominal                 2  eng-jp-all.parquet, eng-jp-main.parquet
+adv                      18  curated/jmdict-en-jp.parquet, curated/mcfnlp-en-my.parquet, curated/wiktionary-en-fr.parquet, curated/wiktionary-en-jp.parquet, curated/wiktionary-en-my.parquet, curated/wordnet-en-fr.parquet, eng-fr-all.parquet, eng-fr-main.parquet, eng-fr-words.parquet, eng-jp-all.parquet, eng-jp-main.parquet, eng-jp-words.parquet, eng-mm-all.parquet, eng-mm-main.parquet, eng-mm-words.parquet, reverse/eng-fr-words.parquet, reverse/eng-jp-words.parquet, reverse/eng-mm-words.parquet
+advpart                   1  curated/mcfnlp-en-my.parquet
+advs                      1  curated/mcfnlp-en-my.parquet
+affix                     2  eng-jp-all.parquet, eng-jp-main.parquet
+article                   7  curated/wiktionary-en-fr.parquet, curated/wiktionary-en-jp.parquet, eng-fr-all.parquet, eng-fr-words.parquet, eng-jp-words.parquet, reverse/eng-fr-words.parquet, reverse/eng-jp-words.parquet
+aux                       1  curated/jmdict-en-jp.parquet
+character                 4  eng-fr-all.parquet, eng-jp-all.parquet, eng-jp-main.parquet, eng-mm-all.parquet
+classifier                2  eng-mm-all.parquet, eng-mm-main.parquet
+combining_form            1  eng-jp-all.parquet
+conj                     17  curated/jmdict-en-jp.parquet, curated/mcfnlp-en-my.parquet, curated/wiktionary-en-fr.parquet, curated/wiktionary-en-jp.parquet, curated/wiktionary-en-my.parquet, eng-fr-all.parquet, eng-fr-main.parquet, eng-fr-words.parquet, eng-jp-all.parquet, eng-jp-main.parquet, eng-jp-words.parquet, eng-mm-all.parquet, eng-mm-main.parquet, eng-mm-words.parquet, reverse/eng-fr-words.parquet, reverse/eng-jp-words.parquet, reverse/eng-mm-words.parquet
+contraction              11  curated/wiktionary-en-fr.parquet, curated/wiktionary-en-jp.parquet, curated/wiktionary-en-my.parquet, eng-fr-all.parquet, eng-fr-main.parquet, eng-fr-words.parquet, eng-jp-words.parquet, eng-mm-words.parquet, reverse/eng-fr-words.parquet, reverse/eng-jp-words.parquet, reverse/eng-mm-words.parquet
+cop                       1  curated/jmdict-en-jp.parquet
+counter                   3  curated/jmdict-en-jp.parquet, eng-jp-all.parquet, eng-jp-main.parquet
+det                      14  curated/mcfnlp-en-my.parquet, curated/wiktionary-en-fr.parquet, curated/wiktionary-en-jp.parquet, curated/wiktionary-en-my.parquet, eng-fr-all.parquet, eng-fr-main.parquet, eng-fr-words.parquet, eng-jp-words.parquet, eng-mm-all.parquet, eng-mm-main.parquet, eng-mm-words.parquet, reverse/eng-fr-words.parquet, reverse/eng-jp-words.parquet, reverse/eng-mm-words.parquet
+indefadv                  1  curated/mcfnlp-en-my.parquet
+indefart                  1  curated/mcfnlp-en-my.parquet
+indefdet                  1  curated/mcfnlp-en-my.parquet
+indefpron                 1  curated/mcfnlp-en-my.parquet
+infix                     2  eng-fr-all.parquet, eng-jp-all.parquet
+interfix                  2  eng-fr-all.parquet, eng-fr-main.parquet
+interj                    1  curated/mcfnlp-en-my.parquet
+intj                     16  curated/jmdict-en-jp.parquet, curated/wiktionary-en-fr.parquet, curated/wiktionary-en-jp.parquet, curated/wiktionary-en-my.parquet, eng-fr-all.parquet, eng-fr-main.parquet, eng-fr-words.parquet, eng-jp-all.parquet, eng-jp-main.parquet, eng-jp-words.parquet, eng-mm-all.parquet, eng-mm-main.parquet, eng-mm-words.parquet, reverse/eng-fr-words.parquet, reverse/eng-jp-words.parquet, reverse/eng-mm-words.parquet
+n                         1  curated/mcfnlp-en-my.parquet
+name                     15  curated/wiktionary-en-fr.parquet, curated/wiktionary-en-jp.parquet, curated/wiktionary-en-my.parquet, eng-fr-all.parquet, eng-fr-main.parquet, eng-fr-words.parquet, eng-jp-all.parquet, eng-jp-main.parquet, eng-jp-words.parquet, eng-mm-all.parquet, eng-mm-main.parquet, eng-mm-words.parquet, reverse/eng-fr-words.parquet, reverse/eng-jp-words.parquet, reverse/eng-mm-words.parquet
+noun                     17  curated/jmdict-en-jp.parquet, curated/wiktionary-en-fr.parquet, curated/wiktionary-en-jp.parquet, curated/wiktionary-en-my.parquet, curated/wordnet-en-fr.parquet, eng-fr-all.parquet, eng-fr-main.parquet, eng-fr-words.parquet, eng-jp-all.parquet, eng-jp-main.parquet, eng-jp-words.parquet, eng-mm-all.parquet, eng-mm-main.parquet, eng-mm-words.parquet, reverse/eng-fr-words.parquet, reverse/eng-jp-words.parquet, reverse/eng-mm-words.parquet
+ns                        1  curated/mcfnlp-en-my.parquet
+num                      16  curated/jmdict-en-jp.parquet, curated/wiktionary-en-fr.parquet, curated/wiktionary-en-jp.parquet, curated/wiktionary-en-my.parquet, eng-fr-all.parquet, eng-fr-main.parquet, eng-fr-words.parquet, eng-jp-all.parquet, eng-jp-main.parquet, eng-jp-words.parquet, eng-mm-all.parquet, eng-mm-main.parquet, eng-mm-words.parquet, reverse/eng-fr-words.parquet, reverse/eng-jp-words.parquet, reverse/eng-mm-words.parquet
+other                     1  curated/jmdict-en-jp.parquet
+particle                 16  curated/jmdict-en-jp.parquet, curated/wiktionary-en-fr.parquet, curated/wiktionary-en-jp.parquet, curated/wiktionary-en-my.parquet, eng-fr-all.parquet, eng-fr-main.parquet, eng-fr-words.parquet, eng-jp-all.parquet, eng-jp-main.parquet, eng-jp-words.parquet, eng-mm-all.parquet, eng-mm-main.parquet, eng-mm-words.parquet, reverse/eng-fr-words.parquet, reverse/eng-jp-words.parquet, reverse/eng-mm-words.parquet
+pers                      1  curated/mcfnlp-en-my.parquet
+phrase                   16  curated/jmdict-en-jp.parquet, curated/wiktionary-en-fr.parquet, curated/wiktionary-en-jp.parquet, curated/wiktionary-en-my.parquet, eng-fr-all.parquet, eng-fr-main.parquet, eng-fr-words.parquet, eng-jp-all.parquet, eng-jp-main.parquet, eng-jp-words.parquet, eng-mm-all.parquet, eng-mm-main.parquet, eng-mm-words.parquet, reverse/eng-fr-words.parquet, reverse/eng-jp-words.parquet, reverse/eng-mm-words.parquet
+possess                   1  curated/mcfnlp-en-my.parquet
+postp                    10  curated/wiktionary-en-fr.parquet, curated/wiktionary-en-jp.parquet, eng-fr-all.parquet, eng-fr-words.parquet, eng-jp-all.parquet, eng-jp-words.parquet, eng-mm-all.parquet, eng-mm-main.parquet, reverse/eng-fr-words.parquet, reverse/eng-jp-words.parquet
+pref                      1  curated/mcfnlp-en-my.parquet
+prefix                   12  curated/jmdict-en-jp.parquet, curated/wiktionary-en-fr.parquet, curated/wiktionary-en-jp.parquet, curated/wiktionary-en-my.parquet, eng-fr-all.parquet, eng-fr-main.parquet, eng-jp-all.parquet, eng-jp-main.parquet, eng-mm-all.parquet, reverse/eng-fr-words.parquet, reverse/eng-jp-words.parquet, reverse/eng-mm-words.parquet
+prep                     13  curated/mcfnlp-en-my.parquet, curated/wiktionary-en-fr.parquet, curated/wiktionary-en-jp.parquet, curated/wiktionary-en-my.parquet, eng-fr-all.parquet, eng-fr-main.parquet, eng-fr-words.parquet, eng-jp-words.parquet, eng-mm-all.parquet, eng-mm-words.parquet, reverse/eng-fr-words.parquet, reverse/eng-jp-words.parquet, reverse/eng-mm-words.parquet
+prep_phrase              11  curated/wiktionary-en-fr.parquet, curated/wiktionary-en-jp.parquet, curated/wiktionary-en-my.parquet, eng-fr-all.parquet, eng-fr-main.parquet, eng-fr-words.parquet, eng-jp-words.parquet, eng-mm-words.parquet, reverse/eng-fr-words.parquet, reverse/eng-jp-words.parquet, reverse/eng-mm-words.parquet
+pron                     17  curated/jmdict-en-jp.parquet, curated/mcfnlp-en-my.parquet, curated/wiktionary-en-fr.parquet, curated/wiktionary-en-jp.parquet, curated/wiktionary-en-my.parquet, eng-fr-all.parquet, eng-fr-main.parquet, eng-fr-words.parquet, eng-jp-all.parquet, eng-jp-main.parquet, eng-jp-words.parquet, eng-mm-all.parquet, eng-mm-main.parquet, eng-mm-words.parquet, reverse/eng-fr-words.parquet, reverse/eng-jp-words.parquet, reverse/eng-mm-words.parquet
+proverb                  15  curated/wiktionary-en-fr.parquet, curated/wiktionary-en-jp.parquet, curated/wiktionary-en-my.parquet, eng-fr-all.parquet, eng-fr-main.parquet, eng-fr-words.parquet, eng-jp-all.parquet, eng-jp-main.parquet, eng-jp-words.parquet, eng-mm-all.parquet, eng-mm-main.parquet, eng-mm-words.parquet, reverse/eng-fr-words.parquet, reverse/eng-jp-words.parquet, reverse/eng-mm-words.parquet
+punct                     4  eng-fr-all.parquet, eng-jp-all.parquet, eng-jp-main.parquet, eng-mm-all.parquet
+root                      2  eng-jp-all.parquet, eng-jp-main.parquet
+suff                      1  curated/mcfnlp-en-my.parquet
+suffix                   13  curated/jmdict-en-jp.parquet, curated/wiktionary-en-fr.parquet, curated/wiktionary-en-jp.parquet, curated/wiktionary-en-my.parquet, eng-fr-all.parquet, eng-fr-main.parquet, eng-jp-all.parquet, eng-jp-main.parquet, eng-mm-all.parquet, eng-mm-main.parquet, reverse/eng-fr-words.parquet, reverse/eng-jp-words.parquet, reverse/eng-mm-words.parquet
+syllable                  1  eng-jp-all.parquet
+symb                      1  curated/mcfnlp-en-my.parquet
+symbol                   11  curated/wiktionary-en-fr.parquet, curated/wiktionary-en-jp.parquet, curated/wiktionary-en-my.parquet, eng-fr-all.parquet, eng-fr-main.parquet, eng-jp-all.parquet, eng-jp-main.parquet, eng-mm-all.parquet, reverse/eng-fr-words.parquet, reverse/eng-jp-words.parquet, reverse/eng-mm-words.parquet
+v                         1  curated/mcfnlp-en-my.parquet
+verb                     17  curated/jmdict-en-jp.parquet, curated/wiktionary-en-fr.parquet, curated/wiktionary-en-jp.parquet, curated/wiktionary-en-my.parquet, curated/wordnet-en-fr.parquet, eng-fr-all.parquet, eng-fr-main.parquet, eng-fr-words.parquet, eng-jp-all.parquet, eng-jp-main.parquet, eng-jp-words.parquet, eng-mm-all.parquet, eng-mm-main.parquet, eng-mm-words.parquet, reverse/eng-fr-words.parquet, reverse/eng-jp-words.parquet, reverse/eng-mm-words.parquet
+vs                        1  curated/mcfnlp-en-my.parquet
