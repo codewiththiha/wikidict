@@ -210,6 +210,41 @@ below as the primary EN→MY table.
 No HuggingFace equivalent of the MCFNLP dataset was found for Japanese or
 French; JMdict (ja) and Wiktionary-reverse/Freedict (fr) fill those gaps.
 
+## Organized output folders (`output/reverse/` and `output/curated/`)
+
+```
+output/
+├── eng-*-{main,all}.parquet   verbose dictionaries (sentence glosses, kept)
+├── eng-*-words.parquet        filtered word tables (previous builds)
+├── reverse/                   build_reverse.py --no-filter (FULL, drops nothing)
+│   ├── eng-jp-words.parquet   69,786 rows
+│   ├── eng-fr-words.parquet   128,263 rows
+│   └── eng-mm-words.parquet   8,149 rows
+└── curated/                   recommended PRIMARY datasets per pair (all Parquet)
+    ├── mcfnlp-en-my.parquet      110,640 rows  EN↔MY primary (HuggingFace)
+    ├── wiktionary-en-my.parquet   8,149 rows  EN↔MY supplement
+    ├── wiktionary-en-jp.parquet  69,786 rows  EN↔JP now
+    ├── jmdict-en-jp.parquet     443,207 rows  EN↔JP 3x+ coverage (JMdict, reversed)
+    └── wiktionary-en-fr.parquet 128,263 rows  EN↔FR solid
+```
+
+Regenerate them:
+
+```bash
+# FULL unfiltered reverse tables (no POS/tag/script filter, no de-dup)
+python scripts/build_reverse.py --no-filter --outdir output/reverse
+
+# JMdict reversed to Parquet (English gloss -> Japanese word)
+python scripts/build_jmdict.py            # -> output/curated/jmdict-en-jp.parquet
+```
+
+* `output/curated/` is the app-ready set: English is always the `word`
+  column, the target-language word is in `definition`. The mcfnlp file has 3
+  columns (`word,pos,definition`); the rest add `romanization, sense,
+  lang_code, source`. Each folder has its own `README.md`.
+* `build_jmdict.py` reads the JMdict JSON (see the Research table for the
+  download link) and maps JMdict POS codes to broad categories.
+
 ## Notes for the bridge-dictionary app
 
 * `entry_id` is a natural primary key; `(word, pos, sense_index)` is a good

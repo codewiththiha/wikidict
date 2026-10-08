@@ -78,7 +78,12 @@ def main() -> None:
     ap.add_argument("--outdir", default="output")
     ap.add_argument("--include-pos", action="store_true",
                     help="also keep affix/symbol/phrase POS rows (default: skip)")
+    ap.add_argument("--no-filter", action="store_true",
+                    help="keep EVERYTHING: no POS skip, no tag skip, no script "
+                         "check, no de-duplication (implies --include-pos)")
     args = ap.parse_args()
+    if args.no_filter:
+        args.include_pos = True
 
     targets = {lc: TARGETS[lc] for lc in args.langs if lc in TARGETS}
     for lc in args.langs:
@@ -130,21 +135,23 @@ def main() -> None:
                 tw = (tr.get("word") or "").strip()
                 if not tw:
                     continue
-                if SKIP_TR_TAGS & set(tr.get("tags") or []):
-                    continue
-                if not script_re[lc].search(tw):
-                    stats[lc]["bad_script"] += 1
-                    continue
+                if not args.no_filter:
+                    if SKIP_TR_TAGS & set(tr.get("tags") or []):
+                        continue
+                    if not script_re[lc].search(tw):
+                        stats[lc]["bad_script"] += 1
+                        continue
 
                 roman = (tr.get("roman") or "").strip()
                 sense = (tr.get("sense") or "").strip()
                 if sense.lower() == "translations":  # template artifact
                     sense = ""
-                key = (word.lower(), pos, tw, roman, sense)
-                if key in seen[lc]:
-                    stats[lc]["duplicates"] += 1
-                    continue
-                seen[lc].add(key)
+                if not args.no_filter:
+                    key = (word.lower(), pos, tw, roman, sense)
+                    if key in seen[lc]:
+                        stats[lc]["duplicates"] += 1
+                        continue
+                    seen[lc].add(key)
 
                 rows[lc].append({
                     "word": word,
