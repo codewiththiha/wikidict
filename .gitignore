@@ -1,0 +1,6 @@
+# raw dumps (large binaries >100MB — regenerate with scripts/download.py)
+data/raw/
+
+__pycache__/
+*.pyc
+.venv/
