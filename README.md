@@ -26,7 +26,7 @@ Wiktionary (English edition)
 pip install -r requirements.txt
 
 python scripts/download.py            # download all 3 dumps (resumable)
-python scripts/build_parquet.py       # build the 3 parquet files
+python scripts/build_parquet.py       # build both presets for all languages
 python scripts/verify_parquet.py output/*.parquet --sqlite   # verify + SQLite round-trip test
 ```
 
@@ -35,8 +35,56 @@ Individual steps:
 ```bash
 python scripts/download.py Japanese            # one language only
 python scripts/inspect_schema.py data/raw/*.jsonl   # re-run the structure research
-python scripts/build_parquet.py --langs Burmese --keep-all   # skip POS filtering
+python scripts/build_parquet.py --presets main      # only the main preset
+python scripts/build_parquet.py --langs Burmese --presets all
+python scripts/build_parquet.py --keep-all          # disable POS filtering
 ```
+
+## Presets
+
+Each language is exported once per preset; the file name carries the preset:
+
+| preset | columns | filter | files |
+|---|---|---|---|
+| `main` | `word`, `pos`, `definition`, `ipa`, `romanization` | **words-only** (definitions must be word-like, pure English) | `eng-jp-main.parquet`, … |
+| `all` | every extracted column | none | `eng-jp-all.parquet`, … |
+
+`main` is the dictionary-grade export meant for the app's bridge lookups;
+`all` keeps everything for analysis.
+
+## Word-only filter ("words, not sentences")
+
+Because English is the bridge key, `main` keeps only definitions that look
+like dictionary **words** — single lexemes, compounds, or comma/semicolon
+word-lists — and drops descriptive sentences. A definition survives only if
+**all** layers pass:
+
+1. **Pure-ASCII letters** — any non-ASCII alphabetic character rejects the
+   row. This strips glosses embedding Japanese kana/kanji (`synonym of
+   国内総生産 …`), Burmese script (`(~ဂြိုဟ်) Mars`), or accented
+   self-references in French (`inflection of tuméfier`).
+2. **Definitional-pattern blacklist** — regexes for Wiktionary's sentence
+   templates: `used to/for`, `inflection of`, `plural of`, `synonym of`,
+   `short for`, `one who`, `the act of`, `romanization of`, `such as`, …
+3. **Segment analysis** — the definition is split on `,` and `;`; every
+   segment must contain **≤ 4 tokens** (hyphenated compounds count as one)
+   and **zero function words** (of, for, the, to, with, that, used, who, …).
+
+What this keeps vs. drops:
+
+| definition | verdict |
+|---|---|
+| `one, single` | ✅ keep |
+| `rolling pin` / `gross domestic product` | ✅ keep (compounds) |
+| `bustling, lively, busy` | ✅ keep (word list) |
+| `counter for floors or stories of a building` | ❌ sentence |
+| `used to express that something was done in vain, for nothing` | ❌ sentence |
+| `synonym of 国内総生産 (kokunai sōseisan, …)` | ❌ non-English chars |
+| `inflection of oxyder` | ❌ conjugation sentence |
+
+Exact `(word, pos, definition)` duplicates are collapsed in word-only mode.
+The build prints a per-reason rejection breakdown with examples so the
+classifier's behaviour is auditable (see build log).
 
 ## Research: do the dumps share the same structure? ✅ Yes
 
@@ -98,11 +146,14 @@ Parquet file metadata carries `dictionary`, `word_language_code`,
 
 ## Current build (2026-10-08)
 
-| file | rows | unique words | size |
-|---|---|---|---|
-| `output/eng-jp.parquet` | 149,410 | 91,713 | 11.7 MB |
-| `output/eng-fr.parquet` | 459,790 | 390,475 | 18.7 MB |
-| `output/eng-mm.parquet` | 14,547 | 8,367 | 1.1 MB |
+| file | rows | size |
+|---|---|---|
+| `output/eng-jp-main.parquet` | 51,199 | 1.4 MB |
+| `output/eng-fr-main.parquet` | 69,125 | 1.7 MB |
+| `output/eng-mm-main.parquet` | 6,279 | 0.2 MB |
+| `output/eng-jp-all.parquet` | 149,410 (91,713 unique words) | 11.7 MB |
+| `output/eng-fr-all.parquet` | 459,790 (390,475 unique words) | 18.7 MB |
+| `output/eng-mm-all.parquet` | 14,547 (8,367 unique words) | 1.1 MB |
 
 ## Notes for the bridge-dictionary app
 
