@@ -15,9 +15,13 @@ Wiktionary (English edition)
         ▼
  scripts/download.py          Japanese.jsonl / French.jsonl / Burmese.jsonl
         ▼
- scripts/build_parquet.py     flat, tidy tables
+ scripts/build_parquet.py     flat, tidy tables           (target word + English glosses)
         ▼
- output/eng-jp.parquet        output/eng-fr.parquet        output/eng-mm.parquet
+ output/eng-jp-{main,all}.parquet ...
+        ▼
+ scripts/build_reverse.py     English-dump translations   (English word + target word)
+        ▼
+ output/eng-jp-words.parquet  output/eng-fr-words.parquet output/eng-mm-words.parquet
 ```
 
 ## Quick start
@@ -28,6 +32,10 @@ pip install -r requirements.txt
 python scripts/download.py            # download all 3 dumps (resumable)
 python scripts/build_parquet.py       # build both presets for all languages
 python scripts/verify_parquet.py output/*.parquet --sqlite   # verify + SQLite round-trip test
+
+# clean word-level "reverse" dictionaries (English word -> target word):
+python scripts/download.py English    # 3.3 GB English dump
+python scripts/build_reverse.py       # -> eng-{jp,fr,mm}-words.parquet
 ```
 
 Individual steps:
@@ -154,6 +162,53 @@ Parquet file metadata carries `dictionary`, `word_language_code`,
 | `output/eng-jp-all.parquet` | 149,410 (91,713 unique words) | 11.7 MB |
 | `output/eng-fr-all.parquet` | 459,790 (390,475 unique words) | 18.7 MB |
 | `output/eng-mm-all.parquet` | 14,547 (8,367 unique words) | 1.1 MB |
+
+## Reverse dictionaries: clean word-level data (`*-words.parquet`)
+
+Wiktionary's *foreign* pages carry verbose English **sentence** definitions.
+The **English** pages carry something better for bridging: a `translations`
+field with word-level translations of each English headword — target-language
+word + romanization + POS + sense label, no sentences:
+
+```
+{"word": "cat", "pos": "noun", "translations": [
+    {"lang": "Burmese", "word": "ကြောင်", "roman": "kraung", "sense": "domestic species"}]}
+```
+
+`scripts/build_reverse.py` streams the 3.3 GB English dump
+(1.49 M entries) and extracts translations for ja/fr/my:
+
+```bash
+python scripts/download.py English
+python scripts/build_reverse.py        # -> output/eng-{jp,fr,mm}-words.parquet
+```
+
+Schema (same core as the clean HuggingFace english-myanmar datasets, so the
+app can treat both identically): `word` (English, the bridge key), `pos`,
+`definition` (**the word in the target language**), `romanization`, `sense`,
+`lang_code`, `source`.
+
+| file | pairs | unique English words |
+|---|---|---|
+| `output/eng-jp-words.parquet` | 69,328 | 37,155 |
+| `output/eng-fr-words.parquet` | 127,564 | 71,305 |
+| `output/eng-mm-words.parquet` | 8,130 | 5,821 |
+
+Burmese coverage in Wiktionary translations is thin — use the MCFNLP dataset
+below as the primary EN→MY table.
+
+## Research: clean word-dictionary sources found
+
+| source | pair(s) | size | notes |
+|---|---|---|---|
+| [english-myanmar-dictionary-dataset-mcfnlp](https://huggingface.co/datasets/chuuhtetnaing/english-myanmar-dictionary-dataset-mcfnlp) | en→my | **110,640 rows**, parquet, schema `word/pos/definition` (Burmese words) | the cleanest EN→MY found; from the [MCF NLP dictionary](https://github.com/mcfnlp/Dictionary) |
+| [english-myanmar-dictionary-dataset-EngMyanDictionary](https://huggingface.co/datasets/chuuhtetnaing/english-myanmar-dictionary-dataset-EngMyanDictionary) | en→my | ~950 MB, 2 parquet shards | messier: HTML-formatted definitions, images, keywords |
+| [JMdict (jmdict-simplified)](https://github.com/scriptin/jmdict-simplified/releases) | ja↔en | **218,863 entries**, JSON 11.5 MB (`jmdict-eng-*.json.tgz`), CC BY-SA | the standard Japanese word dictionary (used by Yomichan/10ten); short word-level English glosses, POS, kana+kanji — ideal for JA, usable reversed |
+| [English Wiktionary translations](https://kaikki.org/dictionary/English/words/kaikki.org-dictionary-English-words.jsonl) | en→ja/fr/my… | 3.3 GB JSONL | what `build_reverse.py` parses → the `*-words` tables |
+| [Freedict](https://freedict.org/downloads/) | eng↔fra etc. | e.g. [eng-fra 0.1.6 (dictd)](https://download.freedict.org/dictionaries/eng-fra/0.1.6/freedict-eng-fra-0.1.6.dictd.tar.xz), GPL | community European-language dictionaries, TEI/dictd formats |
+
+No HuggingFace equivalent of the MCFNLP dataset was found for Japanese or
+French; JMdict (ja) and Wiktionary-reverse/Freedict (fr) fill those gaps.
 
 ## Notes for the bridge-dictionary app
 
