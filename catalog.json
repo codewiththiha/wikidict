@@ -1,0 +1,283 @@
+{
+  "packs": [
+    {
+      "id": "mcfnlp-en-my",
+      "file": "packs/mcfnlp-en-my.parquet",
+      "from": "en",
+      "to": "my",
+      "label": "English → Burmese",
+      "name": "MCF NLP English–Myanmar dictionary",
+      "rows": 107861,
+      "bytes": 1532419,
+      "sha256": "1d9f14bb32dbeac8e52ccd79fe48d53ab3a5b1d59cbd91faa0b0128901fb4a81",
+      "columns": [
+        "word",
+        "pos",
+        "definition"
+      ],
+      "version": "mcfnlp/Dictionary (2016), Hugging Face revision d32893d",
+      "built": "2026-10-29",
+      "licence": "unstated",
+      "homepage": "https://github.com/mcfnlp/Dictionary",
+      "downloads": [
+        {
+          "bytes": 2875539,
+          "sha256": "aa244572df5d4fe068d3ebc613d34677ab44860a32e5a10ef36b16020a04085a",
+          "url": "https://huggingface.co/datasets/chuuhtetnaing/english-myanmar-dictionary-dataset-mcfnlp/resolve/d32893d8f1ef98955c69323258e3805227ab0f69/data/train-00000-of-00001.parquet"
+        }
+      ]
+    },
+    {
+      "id": "jmdict-en-jp",
+      "file": "packs/jmdict-en-jp.parquet",
+      "from": "en",
+      "to": "jp",
+      "label": "English → Japanese",
+      "name": "JMdict, read from English",
+      "rows": 421385,
+      "bytes": 6915158,
+      "sha256": "1c163b53c69a54c34a5aca165798a3213da11e56350d64eaebebefa463c89c2f",
+      "columns": [
+        "word",
+        "pos",
+        "definition",
+        "romanization",
+        "sense"
+      ],
+      "version": "JMdict 3.6.2 (2026-10-26)",
+      "built": "2026-10-29",
+      "licence": "CC-BY-SA-4.0",
+      "homepage": "https://www.edrdg.org/jmdict/j_jmdict.html",
+      "downloads": [
+        {
+          "bytes": 11536778,
+          "sha256": "809d104fe3c1e0ab328ff265bdc52b5eed1f9b669088fd199ef4e713812958a3",
+          "url": "https://github.com/scriptin/jmdict-simplified/releases/download/3.6.2%2B20261026175559/jmdict-eng-3.6.2%2B20261026175559.json.tgz"
+        }
+      ]
+    },
+    {
+      "id": "cedict-en-zh",
+      "file": "packs/cedict-en-zh.parquet",
+      "from": "en",
+      "to": "zh",
+      "label": "English → Chinese",
+      "name": "CC-CEDICT, read from English",
+      "rows": 178950,
+      "bytes": 3834540,
+      "sha256": "58fd9481cca0f10b3aa84cb46cecd3d66704028c404957dc98e9ae264a2d1961",
+      "columns": [
+        "word",
+        "pos",
+        "definition",
+        "romanization",
+        "sense"
+      ],
+      "version": "CC-CEDICT of 2026-10-29",
+      "built": "2026-10-29",
+      "licence": "CC-BY-SA-4.0",
+      "homepage": "https://www.mdbg.net/chinese/dictionary?page=cc-cedict",
+      "downloads": [
+        {
+          "bytes": 3982205,
+          "sha256": "06d0d0e23362867f00ed399a634af016954d14cf3e074b1a937088db6837fb74",
+          "url": "https://www.mdbg.net/chinese/export/cedict/cedict_1_0_ts_utf-8_mdbg.txt.gz"
+        }
+      ]
+    },
+    {
+      "id": "krdict-en-ko",
+      "file": "packs/krdict-en-ko.parquet",
+      "from": "en",
+      "to": "ko",
+      "label": "English → Korean",
+      "name": "NIKL Korean-English Learners' Dictionary, read from English",
+      "rows": 106822,
+      "bytes": 2503216,
+      "sha256": "16f13225be6602a08dd628c551e3e74ec38a06f5bd3dfe9052a4313cb6849b73",
+      "columns": [
+        "word",
+        "pos",
+        "definition",
+        "sense"
+      ],
+      "version": "krdict XML of 2019-08-02",
+      "built": "2026-10-29",
+      "licence": "CC-BY-SA-2.0-KR",
+      "homepage": "https://krdict.korean.go.kr/",
+      "downloads": [
+        {
+          "bytes": 33518435,
+          "sha256": "385992e097dde2780b1d07ea13d4054aeda3cec89274c3577571e25847243d02",
+          "url": "https://raw.githubusercontent.com/spellcheck-ko/korean-dict-nikl-krdict/e7249562dca526461a347eb2cc5a2e67a17c4488/5000.xml"
+        },
+        {
+          "bytes": 35673773,
+          "sha256": "81c5dd78473795a13a92cf886f1928fa35e3c955643bb46c8bf620a98cd8f659",
+          "url": "https://raw.githubusercontent.com/spellcheck-ko/korean-dict-nikl-krdict/e7249562dca526461a347eb2cc5a2e67a17c4488/10000.xml"
+        },
+        {
+          "bytes": 36392804,
+          "sha256": "dde06ca4b5247030a966589206aa1076c2b3f227870c2101536abbe14400bab7",
+          "url": "https://raw.githubusercontent.com/spellcheck-ko/korean-dict-nikl-krdict/e7249562dca526461a347eb2cc5a2e67a17c4488/15000.xml"
+        },
+        {
+          "bytes": 34406541,
+          "sha256": "28cd04c09979dcacd6f1612e5896431cf75092146d3b1fa139cef2fa16a75e52",
+          "url": "https://raw.githubusercontent.com/spellcheck-ko/korean-dict-nikl-krdict/e7249562dca526461a347eb2cc5a2e67a17c4488/20000.xml"
+        },
+        {
+          "bytes": 33474886,
+          "sha256": "9eb85ba9f6ec6a12f40de3c74bf75c65fcdbaca2839b2f03c630f0b38616b09a",
+          "url": "https://raw.githubusercontent.com/spellcheck-ko/korean-dict-nikl-krdict/e7249562dca526461a347eb2cc5a2e67a17c4488/25000.xml"
+        },
+        {
+          "bytes": 32946752,
+          "sha256": "99ffc43c3609e03c839a7a8cceda4dbaf772069f56e03f8a43df8087c85cc77e",
+          "url": "https://raw.githubusercontent.com/spellcheck-ko/korean-dict-nikl-krdict/e7249562dca526461a347eb2cc5a2e67a17c4488/30000.xml"
+        },
+        {
+          "bytes": 33682544,
+          "sha256": "6927e63b1be2c877a90ef5c12b74dcd33006debba5cd44137c0e329ddaa4e9cb",
+          "url": "https://raw.githubusercontent.com/spellcheck-ko/korean-dict-nikl-krdict/e7249562dca526461a347eb2cc5a2e67a17c4488/35000.xml"
+        },
+        {
+          "bytes": 33052228,
+          "sha256": "6d8f3789503b02a269b243669816500562a68c172653cb18abd99d99cf4dcc7d",
+          "url": "https://raw.githubusercontent.com/spellcheck-ko/korean-dict-nikl-krdict/e7249562dca526461a347eb2cc5a2e67a17c4488/40000.xml"
+        },
+        {
+          "bytes": 33812290,
+          "sha256": "96fa24bde66f87384d1fc6c386ce5670115fa4c06f40fb1a3a2834843db3cdea",
+          "url": "https://raw.githubusercontent.com/spellcheck-ko/korean-dict-nikl-krdict/e7249562dca526461a347eb2cc5a2e67a17c4488/45000.xml"
+        },
+        {
+          "bytes": 35537703,
+          "sha256": "1f491e995ed6fd9ebec2f0cfb2057faa270642532efbea07c924a54171e7fb8f",
+          "url": "https://raw.githubusercontent.com/spellcheck-ko/korean-dict-nikl-krdict/e7249562dca526461a347eb2cc5a2e67a17c4488/50000.xml"
+        },
+        {
+          "bytes": 13457805,
+          "sha256": "71123ede933abaa8d7700fe665ee510656b04c5a2258d9f507b1d0d8f6e0e242",
+          "url": "https://raw.githubusercontent.com/spellcheck-ko/korean-dict-nikl-krdict/e7249562dca526461a347eb2cc5a2e67a17c4488/51947.xml"
+        }
+      ]
+    },
+    {
+      "id": "volubilis-en-th",
+      "file": "packs/volubilis-en-th.parquet",
+      "from": "en",
+      "to": "th",
+      "label": "English → Thai",
+      "name": "Volubilis Thai dictionary, read from English",
+      "rows": 191708,
+      "bytes": 3135314,
+      "sha256": "d3c10e3792952cce902f755ec8023bb354adcbddc84563a3fae5935996e1a92f",
+      "columns": [
+        "word",
+        "pos",
+        "definition",
+        "romanization",
+        "sense"
+      ],
+      "version": "Volubilis v. 26.2 (Jul. 2026)",
+      "built": "2026-10-29",
+      "licence": "CC-BY-SA-4.0",
+      "homepage": "https://belisan-volubilis.blogspot.com/",
+      "downloads": [
+        {
+          "bytes": 10848409,
+          "sha256": "b9ab74187a1c369d03bf1a0b94cdc0523edb77a4da72759ee85d81626a20fc0c",
+          "url": "https://downloads.sourceforge.net/project/belisan/VOLUBILIS%20Database.xlsx"
+        }
+      ]
+    },
+    {
+      "id": "wiktionary-en-fr",
+      "file": "packs/wiktionary-en-fr.parquet",
+      "from": "en",
+      "to": "fr",
+      "label": "English → French",
+      "name": "English Wiktionary translations into French",
+      "rows": 128246,
+      "bytes": 2671738,
+      "sha256": "166976492131aee70ba27a6b697a576885d3dd92cd6bfbf0e631a6791fc5ec7b",
+      "columns": [
+        "word",
+        "pos",
+        "definition",
+        "romanization",
+        "sense"
+      ],
+      "version": "English Wiktionary extract of 2026-10-25",
+      "built": "2026-10-29",
+      "licence": "CC-BY-SA-4.0",
+      "homepage": "https://en.wiktionary.org/",
+      "downloads": [
+        {
+          "bytes": 534199199,
+          "sha256": "f495a6b3276ef6d43135193e63d7d9d5cdd00403f8e60214cc75a633ea6575a9",
+          "url": "https://kaikki.org/dictionary/English/words/kaikki.org-dictionary-English-words.jsonl.gz"
+        }
+      ]
+    },
+    {
+      "id": "wiktionary-en-es",
+      "file": "packs/wiktionary-en-es.parquet",
+      "from": "en",
+      "to": "es",
+      "label": "English → Spanish",
+      "name": "English Wiktionary translations into Spanish",
+      "rows": 146587,
+      "bytes": 2724098,
+      "sha256": "b826b437fb88c6598a916e64d2a1c5e7d5a3807f34e5d6aa791632bd88d703d6",
+      "columns": [
+        "word",
+        "pos",
+        "definition",
+        "romanization",
+        "sense"
+      ],
+      "version": "English Wiktionary extract of 2026-10-25",
+      "built": "2026-10-29",
+      "licence": "CC-BY-SA-4.0",
+      "homepage": "https://en.wiktionary.org/",
+      "downloads": [
+        {
+          "bytes": 534199199,
+          "sha256": "f495a6b3276ef6d43135193e63d7d9d5cdd00403f8e60214cc75a633ea6575a9",
+          "url": "https://kaikki.org/dictionary/English/words/kaikki.org-dictionary-English-words.jsonl.gz"
+        }
+      ]
+    },
+    {
+      "id": "wiktionary-en-de",
+      "file": "packs/wiktionary-en-de.parquet",
+      "from": "en",
+      "to": "de",
+      "label": "English → German",
+      "name": "English Wiktionary translations into German",
+      "rows": 161737,
+      "bytes": 3087656,
+      "sha256": "60e2e77fb84db3b472e82226fc09761891c493584f149c9a82f5e74e6d7eca2f",
+      "columns": [
+        "word",
+        "pos",
+        "definition",
+        "romanization",
+        "sense"
+      ],
+      "version": "English Wiktionary extract of 2026-10-25",
+      "built": "2026-10-29",
+      "licence": "CC-BY-SA-4.0",
+      "homepage": "https://en.wiktionary.org/",
+      "downloads": [
+        {
+          "bytes": 534199199,
+          "sha256": "f495a6b3276ef6d43135193e63d7d9d5cdd00403f8e60214cc75a633ea6575a9",
+          "url": "https://kaikki.org/dictionary/English/words/kaikki.org-dictionary-English-words.jsonl.gz"
+        }
+      ]
+    }
+  ]
+}
