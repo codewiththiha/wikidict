@@ -1,0 +1,112 @@
+# Every pack and where its data comes from.
+# Keys are explained in docs/adding-a-pack.md.
+
+[[pack]]
+id = "mcfnlp-en-my"
+from = "en"
+to = "my"
+name = "MCF NLP English–Myanmar dictionary"
+converter = "mcfnlp"
+version = "mcfnlp/Dictionary (2016), Hugging Face revision d32893d"
+licence = "unstated"
+homepage = "https://github.com/mcfnlp/Dictionary"
+downloads = [
+  { file = "mcfnlp.parquet", url = "https://huggingface.co/datasets/chuuhtetnaing/english-myanmar-dictionary-dataset-mcfnlp/resolve/d32893d8f1ef98955c69323258e3805227ab0f69/data/train-00000-of-00001.parquet" },
+]
+
+[[pack]]
+id = "jmdict-en-jp"
+from = "en"
+to = "jp"
+name = "JMdict, read from English"
+converter = "jmdict"
+licence = "CC-BY-SA-4.0"
+homepage = "https://www.edrdg.org/jmdict/j_jmdict.html"
+downloads = [
+  { file = "jmdict-eng.json.tgz", url = "https://github.com/scriptin/jmdict-simplified/releases/download/3.6.2%2B20261026175559/jmdict-eng-3.6.2%2B20261026175559.json.tgz" },
+]
+
+[[pack]]
+id = "cedict-en-zh"
+from = "en"
+to = "zh"
+name = "CC-CEDICT, read from English"
+converter = "cedict"
+licence = "CC-BY-SA-4.0"
+homepage = "https://www.mdbg.net/chinese/dictionary?page=cc-cedict"
+downloads = [
+  { file = "cedict.txt.gz", url = "https://www.mdbg.net/chinese/export/cedict/cedict_1_0_ts_utf-8_mdbg.txt.gz" },
+]
+
+[[pack]]
+id = "krdict-en-ko"
+from = "en"
+to = "ko"
+name = "NIKL Korean-English Learners' Dictionary, read from English"
+converter = "krdict"
+licence = "CC-BY-SA-2.0-KR"
+homepage = "https://krdict.korean.go.kr/"
+downloads = [
+  { file = "krdict-5000.xml", url = "https://raw.githubusercontent.com/spellcheck-ko/korean-dict-nikl-krdict/e7249562dca526461a347eb2cc5a2e67a17c4488/5000.xml" },
+  { file = "krdict-10000.xml", url = "https://raw.githubusercontent.com/spellcheck-ko/korean-dict-nikl-krdict/e7249562dca526461a347eb2cc5a2e67a17c4488/10000.xml" },
+  { file = "krdict-15000.xml", url = "https://raw.githubusercontent.com/spellcheck-ko/korean-dict-nikl-krdict/e7249562dca526461a347eb2cc5a2e67a17c4488/15000.xml" },
+  { file = "krdict-20000.xml", url = "https://raw.githubusercontent.com/spellcheck-ko/korean-dict-nikl-krdict/e7249562dca526461a347eb2cc5a2e67a17c4488/20000.xml" },
+  { file = "krdict-25000.xml", url = "https://raw.githubusercontent.com/spellcheck-ko/korean-dict-nikl-krdict/e7249562dca526461a347eb2cc5a2e67a17c4488/25000.xml" },
+  { file = "krdict-30000.xml", url = "https://raw.githubusercontent.com/spellcheck-ko/korean-dict-nikl-krdict/e7249562dca526461a347eb2cc5a2e67a17c4488/30000.xml" },
+  { file = "krdict-35000.xml", url = "https://raw.githubusercontent.com/spellcheck-ko/korean-dict-nikl-krdict/e7249562dca526461a347eb2cc5a2e67a17c4488/35000.xml" },
+  { file = "krdict-40000.xml", url = "https://raw.githubusercontent.com/spellcheck-ko/korean-dict-nikl-krdict/e7249562dca526461a347eb2cc5a2e67a17c4488/40000.xml" },
+  { file = "krdict-45000.xml", url = "https://raw.githubusercontent.com/spellcheck-ko/korean-dict-nikl-krdict/e7249562dca526461a347eb2cc5a2e67a17c4488/45000.xml" },
+  { file = "krdict-50000.xml", url = "https://raw.githubusercontent.com/spellcheck-ko/korean-dict-nikl-krdict/e7249562dca526461a347eb2cc5a2e67a17c4488/50000.xml" },
+  { file = "krdict-51947.xml", url = "https://raw.githubusercontent.com/spellcheck-ko/korean-dict-nikl-krdict/e7249562dca526461a347eb2cc5a2e67a17c4488/51947.xml" },
+]
+
+[[pack]]
+id = "volubilis-en-th"
+from = "en"
+to = "th"
+name = "Volubilis Thai dictionary, read from English"
+converter = "volubilis"
+licence = "CC-BY-SA-4.0"
+homepage = "https://belisan-volubilis.blogspot.com/"
+downloads = [
+  { file = "volubilis.xlsx", url = "https://downloads.sourceforge.net/project/belisan/VOLUBILIS%20Database.xlsx" },
+]
+
+[[pack]]
+id = "wiktionary-en-fr"
+from = "en"
+to = "fr"
+name = "English Wiktionary translations into French"
+converter = "wiktionary"
+options = { lang_code = "fr" }
+licence = "CC-BY-SA-4.0"
+homepage = "https://en.wiktionary.org/"
+downloads = [
+  { file = "English.jsonl.gz", url = "https://kaikki.org/dictionary/English/words/kaikki.org-dictionary-English-words.jsonl.gz" },
+]
+
+[[pack]]
+id = "wiktionary-en-es"
+from = "en"
+to = "es"
+name = "English Wiktionary translations into Spanish"
+converter = "wiktionary"
+options = { lang_code = "es" }
+licence = "CC-BY-SA-4.0"
+homepage = "https://en.wiktionary.org/"
+downloads = [
+  { file = "English.jsonl.gz", url = "https://kaikki.org/dictionary/English/words/kaikki.org-dictionary-English-words.jsonl.gz" },
+]
+
+[[pack]]
+id = "wiktionary-en-de"
+from = "en"
+to = "de"
+name = "English Wiktionary translations into German"
+converter = "wiktionary"
+options = { lang_code = "de" }
+licence = "CC-BY-SA-4.0"
+homepage = "https://en.wiktionary.org/"
+downloads = [
+  { file = "English.jsonl.gz", url = "https://kaikki.org/dictionary/English/words/kaikki.org-dictionary-English-words.jsonl.gz" },
+]
